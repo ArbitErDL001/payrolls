@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Delete {{ object.employee_id }} — {{ object.last_name }}, {{ object.first_name }}</h1>
+<form method="post">
+  {% csrf_token %}
+  <p>This action cannot be undone.</p>
+  <button type="submit">Confirm delete</button>
+  <a href="{% url 'employees:list' %}">Cancel</a>
+</form>
+{% endblock %}

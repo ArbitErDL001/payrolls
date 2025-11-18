@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Employees</h1>
+<form method="get">
+  <input type="text" name="q" placeholder="Search name, ID, email" value="{{ request.GET.q }}">
+  <input type="text" name="department" placeholder="Dept code" value="{{ request.GET.department }}">
+  <button type="submit">Filter</button>
+</form>
+<p><a href="{% url 'employees:add' %}">Add employee</a></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Name</th><th>Department</th><th>Position</th><th>Email</th><th>Status</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for e in employees %}
+    <tr>
+      <td>{{ e.employee_id }}</td>
+      <td><a href="{% url 'employees:detail' e.employee_id %}">{{ e.last_name }}, {{ e.first_name }}</a></td>
+      <td>{{ e.department.code }}</td>
+      <td>{{ e.position.title }}</td>
+      <td>{{ e.email }}</td>
+      <td>{{ e.is_active|yesno:"Active,Inactive" }}</td>
+      <td>
+        <a href="{% url 'employees:edit' e.employee_id %}">Edit</a> |
+        <a href="{% url 'employees:delete' e.employee_id %}">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">No employees found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

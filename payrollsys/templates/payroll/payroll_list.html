@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Payroll Records</h1>
+<p><a href="{% url 'payroll:add' %}">Generate Payroll</a></p>
+<table>
+  <tr><th>Employee</th><th>Cutoff</th><th>Gross</th><th>Net</th><th>Actions</th></tr>
+  {% for r in records %}
+  <tr>
+    <td>{{ r.employee.employee_id }}</td>
+    <td>{{ r.cutoff_start }} - {{ r.cutoff_end }}</td>
+    <td>{{ r.gross_pay }}</td>
+    <td>{{ r.net_pay }}</td>
+    <td><a href="{% url 'payroll:detail' r.pk %}">View</a></td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="5">No payroll records yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

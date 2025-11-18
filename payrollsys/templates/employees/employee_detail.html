@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ employee.employee_id }} — {{ employee.last_name }}, {{ employee.first_name }}</h1>
+<p><strong>Department:</strong> {{ employee.department.name }} ({{ employee.department.code }})</p>
+<p><strong>Position:</strong> {{ employee.position.title }}</p>
+<p><strong>Employment:</strong> {{ employee.get_employment_type_display }}</p>
+<p><strong>Email:</strong> {{ employee.email }}</p>
+<p><strong>Phone:</strong> {{ employee.phone }}</p>
+<p><strong>National ID:</strong> {{ employee.national_id }}</p>
+<p><strong>Date hired:</strong> {{ employee.date_hired }}</p>
+<p><a href="{% url 'employees:edit' employee.employee_id %}">Edit</a></p>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Attendance Logs</h1>
+<p><a href="{% url 'attendance:add' %}">Add Log</a></p>
+<table>
+  <tr><th>Employee</th><th>Date</th><th>Time In</th><th>Time Out</th><th>Absent</th><th>Overtime</th><th>Total Hours</th><th>Actions</th></tr>
+  {% for log in logs %}
+  <tr>
+    <td>{{ log.employee.employee_id }}</td>
+    <td>{{ log.date }}</td>
+    <td>{{ log.time_in }}</td>
+    <td>{{ log.time_out }}</td>
+    <td>{{ log.is_absent|yesno:"Yes,No" }}</td>
+    <td>{{ log.overtime_hours }}</td>
+    <td>{{ log.total_hours }}</td>
+    <td>
+      <a href="{% url 'attendance:edit' log.pk %}">Edit</a> |
+      <a href="{% url 'attendance:delete' log.pk %}">Delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="8">No logs found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

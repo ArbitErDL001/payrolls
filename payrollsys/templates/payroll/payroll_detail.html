@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Payroll Record</h1>
+<p><strong>Employee:</strong> {{ record.employee }}</p>
+<p><strong>Cutoff:</strong> {{ record.cutoff_start }} - {{ record.cutoff_end }}</p>
+<p><strong>Gross Pay:</strong> {{ record.gross_pay }}</p>
+<p><strong>Deductions:</strong> {{ record.deductions }}</p>
+<p><strong>Net Pay:</strong> {{ record.net_pay }}</p>
+{% endblock %}
